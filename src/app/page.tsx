@@ -7,6 +7,10 @@ import { fetcher } from "@/lib/coingecko.actions";
 import { CoinOverview } from "../components/home/CoinOverview";
 import { Suspense } from "react";
 import { TrendingCoins } from "../components/home/TrendingCoins";
+import {
+  CoinOverviewFallback,
+  TrendingCoinsFallback,
+} from "../components/fallback";
 
 const dummyData: TrendingCoin[] = [
   {
@@ -57,11 +61,11 @@ const page = async () => {
   return (
     <main className="main-container">
       <section className="home-grid">
-        <Suspense fallback={<div>Loading coin overview...</div>}>
+        <Suspense fallback={<CoinOverviewFallback />}>
           <CoinOverview />
         </Suspense>
 
-        <Suspense fallback={<div>Loading trending coins...</div>}>
+        <Suspense fallback={<TrendingCoinsFallback />}>
           <TrendingCoins />
         </Suspense>
       </section>

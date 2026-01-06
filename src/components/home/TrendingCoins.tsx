@@ -67,6 +67,8 @@ export const TrendingCoins = async () => {
         <DataTable
           data={trendingCoins.coins.slice(0, 6) || []}
           columns={columns}
+          headerCellClassName="py-3!"
+          bodyCellClassName="py-2!"
           rowKey={(coin) => coin.item.id}
         />
       </div>
