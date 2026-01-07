@@ -7,11 +7,19 @@ import React from "react";
 import { DataTable } from "../DataTable";
 
 export const TrendingCoins = async () => {
-  const trendingCoins = await fetcher<{ coins: TrendingCoin[] }>(
-    "/search/trending",
-    undefined,
-    300
-  );
+  let trendingCoins: { coins: TrendingCoin[] };
+
+  try {
+    trendingCoins = await fetcher<{ coins: TrendingCoin[] }>(
+      "/search/trending",
+      undefined,
+      300
+    );
+  } catch (error) {
+    console.error("Error fetching trending coins:", error);
+    // Return empty data to show no trending coins
+    trendingCoins = { coins: [] };
+  }
 
   const columns: DataTableColumn<TrendingCoin>[] = [
     {
@@ -63,15 +71,13 @@ export const TrendingCoins = async () => {
     <div id="trending-coins">
       <h4>Trending Coins</h4>
 
-      <div id="trending-coins">
-        <DataTable
-          data={trendingCoins.coins.slice(0, 6) || []}
-          columns={columns}
-          headerCellClassName="py-3!"
-          bodyCellClassName="py-2!"
-          rowKey={(coin) => coin.item.id}
-        />
-      </div>
+      <DataTable
+        data={trendingCoins.coins.slice(0, 6) || []}
+        columns={columns}
+        headerCellClassName="py-3!"
+        bodyCellClassName="py-2!"
+        rowKey={(coin) => coin.item.id}
+      />
     </div>
   );
 };

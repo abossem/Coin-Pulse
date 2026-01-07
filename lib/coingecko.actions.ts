@@ -21,8 +21,6 @@ export async function fetcher<T>(
     { skipEmptyString: true, skipNull: true }
   );
 
-  console.log("URL", url);
-
   const res = await fetch(url, {
     headers: {
       "x-cg-pro-api-key": API_KEY,

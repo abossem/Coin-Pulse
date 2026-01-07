@@ -3,7 +3,15 @@ import { formatCurrency } from "@/lib/utils";
 import Image from "next/image";
 
 export const CoinOverview = async () => {
-  const coin = await fetcher<CoinDetailsData>("/coins/bitcoin");
+  let coin: CoinDetailsData | null = null;
+
+  try {
+    coin = await fetcher<CoinDetailsData>("/coins/bitcoin");
+  } catch (error) {
+    console.error("Error fetching coin overview:", error);
+    // Return null to trigger fallback UI
+    return null;
+  }
 
   return (
     <div id="coin-overview">
