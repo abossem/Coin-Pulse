@@ -1,8 +1,9 @@
 "use client";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
+
+import { cn } from "@/lib/utils";
 
 export const Header = () => {
   const pathname = usePathname();
